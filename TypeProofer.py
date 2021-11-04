@@ -7,9 +7,9 @@ now = datetime.now()
 dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 #you can just use the Masters exports (delete other fonts), and export the original file and add 'Original' after the name eg, MFFlapperOriginal. Then check the regex for original fonts list creation.
-folder = '/Users/fadhlschriftlabor/Documents/TypeProofer/Fonts'
+folder = '/Users/fadhlschriftlabor/Repositories/TypeProofer/Fonts'
 #WordLists are courtesy of https://github.com/dwyl/english-words
-words = '/Users/fadhlschriftlabor/Documents/TypeProofer/Words.txt'
+words = '/Users/fadhlschriftlabor/Repositories/TypeProofer/Words.txt'
 Uppercase = "AÆBCDÐEFGHIJKL\nMNOŒPÞQRSẞƏTUVWXYZ"
 Lowercase = Uppercase.lower()
 Figures = "0123456789"
@@ -70,7 +70,7 @@ def CompareNewOld(FontNames, PageSize, Fontsize, Letters):
 #Generating random words, should also be a separate function that takes a parameter like uppercase, fontSize, howMuch words (currently using a predefined var 'RandomWords')
 
 for pages in FontNames: 
-    path = '/Users/fadhlschriftlabor/Documents/TypeProofer/Fonts/{f}'.format(f = pages)
+    path = folder +'/{f}'.format(f = pages)
            
     newPage('A4Landscape')
     
