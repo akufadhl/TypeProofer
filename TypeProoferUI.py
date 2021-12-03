@@ -9,7 +9,7 @@ Variable([
     dict(name="folder", ui="EditText", args=dict(text='/Users/fadhlschriftlabor/Repositories/TypeProofer/Fonts')),
     dict(name="CompareUC", ui="CheckBox", args=dict(value=False)),
     dict(name="CompareLC", ui="CheckBox", args=dict(value=False)),
-    dict(name="fontsize", ui="Slider", args=dict(value=45, minValue=6, maxValue=95)),
+    dict(name="fontsize", ui="Slider", args=dict(value=45, minValue=6, maxValue=200)),
     dict(name="ShowUC", ui="CheckBox", args=dict(value=True)),
     dict(name="ShowLC", ui="CheckBox", args=dict(value=True)),
     dict(name="save", ui="Button"),
@@ -104,9 +104,6 @@ def showGlyphs(FontNames, PageSize, Fontsize, Letters):
         #Old(top)
         font(path)
         fontSize(Fontsize)
-        fill(1,0,0)
-        rect(x, y, w, h)
-        fill(1)
         textBox(Letters,(x, y, w, h), align="center")
                     
 #Generating random words, should also be a separate function that takes a parameter like uppercase, fontSize, howMuch words (currently using a predefined var 'RandomWords')   
