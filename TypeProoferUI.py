@@ -10,7 +10,7 @@ Variable([
     dict(name="folder", ui="EditText", args=dict(text='/Users/fadhlschriftlabor/Repositories/TypeProofer/Fonts')),
     dict(name="CompareUC", ui="CheckBox", args=dict(value=False)),
     dict(name="CompareLC", ui="CheckBox", args=dict(value=False)),
-    dict(name="fontsize", ui="Slider", args=dict(value=45, minValue=6, maxValue=200)),
+    dict(name="fontsize", ui="Slider", args=dict(value=65, minValue=6, maxValue=200)),
     dict(name="ShowUC", ui="CheckBox", args=dict(value=True)),
     dict(name="ShowLC", ui="CheckBox", args=dict(value=True)),
     dict(name="save", ui="Button"),
@@ -29,6 +29,8 @@ Lowercase = Uppercase.lower()
 Figures = "0123456789"
 Symbols = "ƒ☺@&¶§©®℗™°|¦†‡℮℠¤£+−×÷=<≤±~¬^∞∅∫∏∑√∂"
 Puncts = """.,:;…!¡?¿·•*⁂․//\⁑‥#-­–—_(){}[]‚„“”‘’«»‹›"'"""
+
+#All the Definitions
 
 def fontName(folder):
     names = []    
