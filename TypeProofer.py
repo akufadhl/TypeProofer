@@ -10,10 +10,11 @@ dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 folder = '/Users/fadhlschriftlabor/Repositories/TypeProofer/Fonts'
 #WordLists are courtesy of https://github.com/dwyl/english-words
 words = '/Users/fadhlschriftlabor/Repositories/TypeProofer/Words.txt'
-Uppercase = "AÆBCDÐEFGHIJKL\nMNOŒPÞQRSẞƏTUVWXYZ"
+Uppercase = "ABCDEFGHIJKL\nMNOPQRSTUVWXYZ"
 Lowercase = Uppercase.lower()
 Figures = "0123456789"
 Symbols = "ƒ☺@&¶§©®℗™°|¦†‡℮℠¤£+−×÷=<≤±~¬^∞∅∫∏∑√∂"
+Puncts = """.,:;…!¡?¿·•*⁂․//\⁑‥#-­–—_(){}[]‚„“”‘’«»‹›"'"""
         
 def fontName(folder):
     names = []    
@@ -32,13 +33,14 @@ def RandWord(words, amounts):
 
     
 #Change the number value for numbers lists,    
-RandomWords = str(RandWord(words, 500))
+RandomWord = str(RandWord(words, 700))
 FontNames = fontName(folder)
 
 
 #Generating The Old and New Comparison
 #Should be a separate function that takes a predifined param, such as lowercase, uppercase, figures, symbols.
-def CompareNewOld(FontNames, PageSize, Fontsize, Letters):    
+def CompareNewOld(FontNames, PageSize, Fontsize, Letters,): 
+        
     for pages in FontNames:
         path = folder + '/{f}'.format(f = pages)
         OriginalFont = re.sub(r'(-)', r'Original\1', path)
@@ -67,26 +69,26 @@ def CompareNewOld(FontNames, PageSize, Fontsize, Letters):
         textBox(Letters,
                 (80, height()-350, 700, 250), align="center")
                 
-#Generating random words, should also be a separate function that takes a parameter like uppercase, fontSize, howMuch words (currently using a predefined var 'RandomWords')
-
-for pages in FontNames: 
-    path = folder +'/{f}'.format(f = pages)
+#Generating random words, should also be a separate function that takes a parameter like uppercase, fontSize, howMuch words (currently using a predefined var 'RandomWords')   
+def RandomWords(FontNames, PageSize, FontSize, RandomWord):
+    for pages in FontNames: 
+        path = folder +'/{f}'.format(f = pages)
            
-    newPage('A4Landscape')
+        newPage(PageSize)
     
-    text(dateNow, (width()-50, 30), align = "right")
+        text(dateNow, (width()-50, 30), align = "right")
 
-    font(path)
-    text(pages, (50, 30))
+        font(path)
+        text(pages, (50, 30))
     
-    font(path)
-    fontSize(18)    
-    textBox(RandomWords,
-            (50, 50, width(), height()-100), align="left")
-            
+        font(path)
+        fontSize(FontSize)    
+        textBox(RandomWord,
+                (50, 50, width()-100, height()-100), align="left")
+           
+CompareNewOld(FontNames, 'A4Landscape', 45, Uppercase)
 CompareNewOld(FontNames, 'A4Landscape', 45, Lowercase)
-           
+RandomWords(FontNames, 'A4Landscape', 20, RandomWord.lower())
+RandomWords(FontNames, 'A4Landscape', 20, RandomWord.upper())
 
-
-
-#saveImage("~/Desktop/MFFlapper Upright.pdf")
+saveImage("~/Desktop/MFSansPlomb.pdf")
