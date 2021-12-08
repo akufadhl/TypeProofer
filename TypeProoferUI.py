@@ -1,4 +1,5 @@
 #from collections import OrderedDict
+from drawBot import *
 from fontTools import ttLib
 import os
 import random
@@ -58,23 +59,55 @@ fonts = TTObject(path)
 #print(fonts)
 
 def sortFont(fonts):
+    uprights = []
+    italics = []
+    
     weightClass = {}
     for font in fonts:
         name = getName(font, 6)
         weight = font['OS/2'].usWeightClass
         width = font['OS/2'].usWidthClass
-        italic = font['post'].italicAngle
+        italic = int(font['post'].italicAngle)
     
-        weightClass[name] = width, weight
-
+        weightClass[name] = width, weight, italic
+    
     weights = sorted(weightClass.items(), key=lambda x:(x[1],x[1][0]))
     
+    for x in weights:
+        #print(x[0],int(x[1][2]))
+        if x[1][2] >= 0:
+            #print(x[0])
+            uprights.append(x[0])
+        else:
+            #print(x[0])
+            italics.append(x[0])
+    res = "\n".join("{} {}".format(x, y) for x, y in zip(uprights, italics))   
+    print(res)    
     weight = []
     for a in weights:
         weight.append(fontPath + "/" + a[0] + ".otf")
     
     #print(weight)
-    return weight
+    return weight, uprights, italics
+    
+# def sortFont(fonts):
+#     weightClass = {}
+#     for font in fonts:
+#         name = getName(font, 6)
+#         weight = font['OS/2'].usWeightClass
+#         width = font['OS/2'].usWidthClass
+#         italic = font['post'].italicAngle
+#
+#         weightClass[name] = width, weight
+#
+#     weights = sorted(weightClass.items(), key=lambda x:(x[1],x[1][0]))
+#
+#     weight = []
+#     for a in weights:
+#         weight.append(fontPath + "/" + a[0] + ".otf")
+#
+#     #print(weight)
+#     return weight
 
 weight = sortFont(fonts)
 #print(weight)
@@ -217,8 +250,8 @@ def showRandomArticle(FontNames, PageSize, Fontsize, RandomWord):
         textBox(txt,
                 (x, y, w, h), align="left")
                     
-showGlyphs(weight, 'A4Landscape', 75, Uppercase)
-showRandomWords(weight, 'A4Landscape', 15, randomWord)
-showRandomArticle(weight, 'A4Landscape', 12, Uppercase)
+#showGlyphs(weight, 'A4Landscape', 75, Uppercase)
+#showRandomWords(weight, 'A4Landscape', 15, randomWord)
+#showRandomArticle(weight, 'A4Landscape', 12, Uppercase)
 #save Image
 #saveImage("~/Desktop/PDFSpecimen.pdf")
