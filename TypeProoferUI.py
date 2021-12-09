@@ -81,8 +81,8 @@ def sortFont(fonts):
         else:
             #print(x[0])
             italics.append(x[0])
-    res = "\n".join("{} {}".format(x, y) for x, y in zip(uprights, italics))   
-    print(res)    
+    #res = "\n".join("{} {}".format(x, y) for x, y in zip(uprights, italics))   
+    #print(res)    
     weight = []
     for a in weights:
         weight.append(fontPath + "/" + a[0] + ".otf")
@@ -109,7 +109,12 @@ def sortFont(fonts):
 #     #print(weight)
 #     return weight
 
-weight = sortFont(fonts)
+fontList = sortFont(fonts)
+weight = fontList[0]
+upright = fontList[1]
+italics = fontList[2]
+
+
 #print(weight)
 #Font style Names using TTFont "name" Table
 
@@ -129,9 +134,9 @@ slanted = weight[2]
 #Font Feature
 
 notFeature = ['aalt', 'case', 'ccmp', 'dnom', 'kern', 'mark', 'mkmk', 'numr', 'ordn', 'pnum', 'sinf', 'subs', 'sups']
-Feat = listOpenTypeFeatures(regular)
+#Feat = listOpenTypeFeatures(regular)
+#Feature = list(filter(lambda a: a not in notFeature, Feat))
 
-Feature = list(filter(lambda a: a not in notFeature, Feat))
 #print(Feature)
 
 def compareNewOld(FontNames, PageSize, Fontsize, Letters): 
