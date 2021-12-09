@@ -15,7 +15,7 @@ dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 words = '/Users/fadhlschriftlabor/Repositories/TypeProofer/Words.txt'
 
 Uppercase = "ABCDEFGHIJKL\nMNOPQRSTUVWXYZ"
-
+Lowercase = Uppercase.lower()
 with open("article.txt", "r", encoding="utf-8") as article:
     #articles = article.read()
     article = re.sub(r'\[\d+\]', ' ', article.read())
@@ -142,6 +142,48 @@ def compareNewOld(FontNames, PageSize, Fontsize, Letters):
         textBox(Letters,
                 (80, height()-350, 700, 250), align="center")
 
+def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0): 
+    x, y, w, h = 65, 100, 710, 430
+    if italic != 0:
+        path = upright[0]
+        fonta = ttLib.TTFont(path)
+        name = getName(fonta, 6)
+
+        newPage(PageSize)
+        #FontName
+        text(name, (50, 30))
+        text("Hamburgefont", (50, height()-30))
+
+        #DateTime
+        text(dateNow, (width()-50, 30), align = "right")
+        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+
+        for fonts in upright:
+            paths = fonts
+            #Old(top)
+            font(paths)
+            fontSize(Fontsize)
+            textBox("Hamburgefonts1234567890",(x, y, w, h))
+            translate(x=0, y=-fontLineHeight())
+        
+    elif italic != 0:       
+        newPage(PageSize)
+        #FontName
+        text(name, (50, 30))
+        text("Hamburgefont", (50, height()-30))
+
+        #DateTime
+        text(dateNow, (width()-50, 30), align = "right")
+        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        
+        for fonts in italic:
+            paths = fonts
+            #Old(top)
+            font(paths)
+            fontSize(Fontsize)
+            textBox("Hamburgefonts1234567890",(x, y, w, h))
+            translate(x=0, y=-fontLineHeight())
+            
 def showGlyphs(FontNames, PageSize, Fontsize, Letters): 
     x, y, w, h = 65, 100, 710, 430
 
@@ -278,10 +320,13 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             #txt.append(article)
             textBox(article,
                     (x, y, w*2.3, h), align="left")
-               
+
+hamburgefont(weight, 'A4Landscape', 45, upright, italic)              
 showAllGlyphs(weight, 'A4Landscape', 20)
-showGlyphs(weight, 'A4Landscape', 65, Uppercase)
+showGlyphs(weight, 'A4Landscape', 75, Uppercase)
+showGlyphs(weight, 'A4Landscape', 75, Lowercase)
 showRandomWords(weight, 'A4Landscape', 15, randomWord)
 showRandomArticle('A4Landscape', 12, article, upright, italic)
+
 #save Image
-#saveImage("~/Desktop/PDFSpecimen.pdf")
+saveImage("~/Desktop/PDFSpecimenWithoutItalic.pdf")
