@@ -78,6 +78,8 @@ def sortFont(fonts):
         if x[1][2] >= 0:
             #print(x[0])
             uprights.append(fontPath + "/" + x[0] + ".otf")
+        elif x[1][2] == None:
+            pass
         else:
             #print(x[0])
             italics.append(fontPath + "/" + x[0] + ".otf")
@@ -87,7 +89,6 @@ def sortFont(fonts):
     for a in weights:
         weight.append(fontPath + "/" + a[0] + ".otf")
     
-    #print(weight)
     return weight, uprights, italics
 
 fontList = sortFont(fonts)
@@ -194,40 +195,65 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
 
                 (x, y, w, h), align="left")
 
-def showRandomArticle(PageSize, Fontsize, article,upright, italic=None):
+def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
     x, y, w, h = 65, 90, 710/2.3, 450
     
-    for pages, pages2 in zip(upright, italic):
-        uprights = pages
-        italics = pages2
-        print(uprights, italics)
-        fonta = ttLib.TTFont(pages)
-        name = getName(fonta, 6)
+    if len(italic) != 0:
+        for pages, pages2 in zip(upright, italic):
+            uprights = pages
+            italics = pages2
+            print(uprights, italics)
+            fonta = ttLib.TTFont(pages)
+            name = getName(fonta, 6)
         
-        newPage(PageSize)
+            newPage(PageSize)
 
-        text(dateNow, (width()-50, 30), align = "right")
-        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+            text(dateNow, (width()-50, 30), align = "right")
+            text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
     
-        text("Random Article", (50, height()-30))
+            text("Random Article", (50, height()-30))
 
-        #font(uprights) #standardFont
-        text(name, (50, 30))
+            #font(uprights) #standardFont
+            text(name, (50, 30))
         
-        #txt = FormattedString()
-        #print(txt)
-        font(uprights)
-        fontSize(Fontsize)
-        #txt.append(article)
-        textBox(article,
-                (x, y, w, h), align="left")
-        translate(x=(w*2)-w/1.3, y=0)
-        font(italics)                
-        textBox(article,
-                (x, y, w, h), align="left")
-                    
-showGlyphs(weight, 'A4Landscape', 75, Uppercase)
-showRandomWords(weight, 'A4Landscape', 15, randomWord)
+            #txt = FormattedString()
+            #print(txt)
+            font(uprights)
+            fontSize(Fontsize)
+            #txt.append(article)
+            textBox(article,
+                    (x, y, w, h), align="left")
+            translate(x=(w*2)-w/1.3, y=0)
+            font(italics)                
+            textBox(article,
+                    (x, y, w, h), align="left")
+    else:
+        for pages in upright:
+            uprights = pages
+            print(uprights)
+            fonta = ttLib.TTFont(pages)
+            name = getName(fonta, 6)
+        
+            newPage(PageSize)
+
+            text(dateNow, (width()-50, 30), align = "right")
+            text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+    
+            text("Random Article", (50, height()-30))
+
+            #font(uprights) #standardFont
+            text(name, (50, 30))
+        
+            #txt = FormattedString()
+            #print(txt)
+            font(uprights)
+            fontSize(Fontsize)
+            #txt.append(article)
+            textBox(article,
+                    (x, y, w*2.3, h), align="left")
+               
+#showGlyphs(weight, 'A4Landscape', 75, Uppercase)
+#showRandomWords(weight, 'A4Landscape', 15, randomWord)
 showRandomArticle('A4Landscape', 12, article, upright, italic)
 #save Image
 #saveImage("~/Desktop/PDFSpecimen.pdf")
