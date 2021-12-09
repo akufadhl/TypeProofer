@@ -77,10 +77,10 @@ def sortFont(fonts):
         #print(x[0],int(x[1][2]))
         if x[1][2] >= 0:
             #print(x[0])
-            uprights.append(x[0])
+            uprights.append(fontPath + "/" + x[0] + ".otf")
         else:
             #print(x[0])
-            italics.append(x[0])
+            italics.append(fontPath + "/" + x[0] + ".otf")
     #res = "\n".join("{} {}".format(x, y) for x, y in zip(uprights, italics))   
     #print(res)    
     weight = []
@@ -89,55 +89,25 @@ def sortFont(fonts):
     
     #print(weight)
     return weight, uprights, italics
-    
-# def sortFont(fonts):
-#     weightClass = {}
-#     for font in fonts:
-#         name = getName(font, 6)
-#         weight = font['OS/2'].usWeightClass
-#         width = font['OS/2'].usWidthClass
-#         italic = font['post'].italicAngle
-#
-#         weightClass[name] = width, weight
-#
-#     weights = sorted(weightClass.items(), key=lambda x:(x[1],x[1][0]))
-#
-#     weight = []
-#     for a in weights:
-#         weight.append(fontPath + "/" + a[0] + ".otf")
-#
-#     #print(weight)
-#     return weight
 
 fontList = sortFont(fonts)
 weight = fontList[0]
 upright = fontList[1]
-italics = fontList[2]
+italic = fontList[2]
 
-
-#print(weight)
 #Font style Names using TTFont "name" Table
-
-
 designerName = getName(fonts[0], 9)
 familyName = getName(fonts[0], 16) #Basic Family Name
 manufacturer = getName(fonts[0], 8)
-fontDesc = """Ordina is a modern grotesques typeface, a fusion of DIN and Helvetica in some way. Expanded to it's limit with 3 scripts support and big variety of styles"""
-preGlyph = "a"
-
-#print(manufacturer)
     
 regular = weight[0]
 slanted = weight[2]
-#print(regular,"\n", slanted)
 
 #Font Feature
 
 notFeature = ['aalt', 'case', 'ccmp', 'dnom', 'kern', 'mark', 'mkmk', 'numr', 'ordn', 'pnum', 'sinf', 'subs', 'sups']
 #Feat = listOpenTypeFeatures(regular)
 #Feature = list(filter(lambda a: a not in notFeature, Feat))
-
-#print(Feature)
 
 def compareNewOld(FontNames, PageSize, Fontsize, Letters): 
 
@@ -215,7 +185,7 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
     
         text("Random Words", (50, height()-30))
 
-        font(path)
+        #font(path)
         text(name, (50, 30))
 
         font(path)
@@ -224,12 +194,13 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
 
                 (x, y, w, h), align="left")
 
-def showRandomArticle(FontNames, PageSize, Fontsize, RandomWord):
+def showRandomArticle(italic=None, upright, PageSize, Fontsize, article):
     x, y, w, h = 65, 90, 710/2.3, 450
     
-    for pages in FontNames:
-        path = pages
-        print(path)
+    for pages, pages2 in zip(upright, italic):
+        uprights = pages
+        italics = pages2
+        print(uprights, italics)
         fonta = ttLib.TTFont(pages)
         name = getName(fonta, 6)
         
@@ -240,23 +211,23 @@ def showRandomArticle(FontNames, PageSize, Fontsize, RandomWord):
     
         text("Random Article", (50, height()-30))
 
-        font(path)
+        #font(uprights) #standardFont
         text(name, (50, 30))
         
-        txt = FormattedString()
+        #txt = FormattedString()
         #print(txt)
-        txt.font(path)
-        txt.fontSize(Fontsize)
-        txt.append(article)
-        textBox(txt,
+        font(uprights)
+        fontSize(Fontsize)
+        #txt.append(article)
+        textBox(article,
                 (x, y, w, h), align="left")
         translate(x=(w*2)-w/1.3, y=0)
-        txt.font(path)                
-        textBox(txt,
+        font(italics)                
+        textBox(article,
                 (x, y, w, h), align="left")
                     
-#showGlyphs(weight, 'A4Landscape', 75, Uppercase)
-#showRandomWords(weight, 'A4Landscape', 15, randomWord)
-#showRandomArticle(weight, 'A4Landscape', 12, Uppercase)
+showGlyphs(weight, 'A4Landscape', 75, Uppercase)
+showRandomWords(weight, 'A4Landscape', 15, randomWord)
+showRandomArticle(italic, upright, 'A4Landscape', 12, article)
 #save Image
 #saveImage("~/Desktop/PDFSpecimen.pdf")
