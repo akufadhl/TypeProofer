@@ -194,7 +194,7 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
 
                 (x, y, w, h), align="left")
 
-def showRandomArticle(italic=None, upright, PageSize, Fontsize, article):
+def showRandomArticle(PageSize, Fontsize, article,upright, italic=None):
     x, y, w, h = 65, 90, 710/2.3, 450
     
     for pages, pages2 in zip(upright, italic):
@@ -228,6 +228,6 @@ def showRandomArticle(italic=None, upright, PageSize, Fontsize, article):
                     
 showGlyphs(weight, 'A4Landscape', 75, Uppercase)
 showRandomWords(weight, 'A4Landscape', 15, randomWord)
-showRandomArticle(italic, upright, 'A4Landscape', 12, article)
+showRandomArticle('A4Landscape', 12, article, upright, italic)
 #save Image
 #saveImage("~/Desktop/PDFSpecimen.pdf")
