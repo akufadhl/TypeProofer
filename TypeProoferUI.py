@@ -143,7 +143,7 @@ def compareNewOld(FontNames, PageSize, Fontsize, Letters):
                 (80, height()-350, 700, 250), align="center")
 
 def showGlyphs(FontNames, PageSize, Fontsize, Letters): 
-    x, y, w, h = 65, 100, 710, 400
+    x, y, w, h = 65, 100, 710, 430
 
     for pages in FontNames:
         path = pages
@@ -171,6 +171,34 @@ def showGlyphs(FontNames, PageSize, Fontsize, Letters):
         fontSize(Fontsize)
         textBox(Letters,(x, y, w, h), align="center")
 
+def showAllGlyphs(FontNames, PageSize, Fontsize): 
+    x, y, w, h = 65, 100, 710, 430
+
+    for pages in FontNames:
+        path = pages
+        fonta = ttLib.TTFont(pages)
+        cmap = fonta['cmap'].getBestCmap().items()
+        name = getName(fonta, 6)
+        #New Page
+        newPage(PageSize)
+
+        #FontName
+        text(name, (50, 30))
+        text("All Chars", (50, height()-30))
+
+        #DateTime
+        text(dateNow, (width()-50, 30), align = "right")
+        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        
+        txt = FormattedString()
+        txt.font(path)
+        txt.fontSize(Fontsize)
+        for key, values in cmap:
+            #print(name)
+            txt.append(chr(key) + " ")
+        textBox(txt,
+                (x, y, w, h), align="left")
+                
 def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
     x, y, w, h = 65, 90, 710, 450
 
@@ -192,7 +220,6 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
         font(path)
         fontSize(Fontsize)
         textBox(RandomWord,
-
                 (x, y, w, h), align="left")
 
 def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
@@ -252,8 +279,9 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             textBox(article,
                     (x, y, w*2.3, h), align="left")
                
-#showGlyphs(weight, 'A4Landscape', 75, Uppercase)
-#showRandomWords(weight, 'A4Landscape', 15, randomWord)
+showAllGlyphs(weight, 'A4Landscape', 20)
+showGlyphs(weight, 'A4Landscape', 65, Uppercase)
+showRandomWords(weight, 'A4Landscape', 15, randomWord)
 showRandomArticle('A4Landscape', 12, article, upright, italic)
 #save Image
 #saveImage("~/Desktop/PDFSpecimen.pdf")
