@@ -6,15 +6,18 @@ import random
 from datetime import datetime
 import re
 
-
+Variable([
+    dict(name="savePDF", ui="Button")
+], globals())
 
 #Export your fonts to the /Fonts folder
 fontPath = "Fonts"
-defaultFont = "lib/Fonts/ModalRegular.otf"
+defaultFont = "lib/Fonts/Modal-Regular.otf"
+
 now = datetime.now()
 dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
-words = '/Users/fadhlschriftlabor/Repositories/TypeProofer/Words.txt'
+words = 'Words.txt'
 
 Uppercase = "ABCDEFGHIJKL\nMNOPQRSTUVWXYZ"
 Lowercase = Uppercase.lower()
@@ -120,6 +123,7 @@ def compareNewOld(FontNames, PageSize, Fontsize, Letters):
         name = getName(fonta, 6)
         #New Page
         newPage(PageSize)
+        font(defaultFont)
 
         #FontName
         text(pages, (50, height()-50))
@@ -150,6 +154,7 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
         name = getName(fonta, 6)
 
         newPage(PageSize)
+        font(defaultFont)
         #FontName
         text(name, (50, 30))
         text("Hamburgefont", (50, height()-30))
@@ -168,6 +173,7 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
         
     elif italic != 0:       
         newPage(PageSize)
+        font(defaultFont)
         #FontName
         text(name, (50, 30))
         text("Hamburgefont", (50, height()-30))
@@ -193,6 +199,7 @@ def showGlyphs(FontNames, PageSize, Fontsize, Letters):
         name = getName(fonta, 6)
         #New Page
         newPage(PageSize)
+        font(defaultFont)
 
         #FontName
         text(name, (50, 30))
@@ -223,6 +230,7 @@ def showAllGlyphs(FontNames, PageSize, Fontsize):
         name = getName(fonta, 6)
         #New Page
         newPage(PageSize)
+        font(defaultFont)
 
         #FontName
         text(name, (50, 30))
@@ -250,6 +258,7 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
         name = getName(fonta, 6)
         
         newPage(PageSize)
+        font(defaultFont)
 
         text(dateNow, (width()-50, 30), align = "right")
         text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
@@ -276,6 +285,7 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             name = getName(fonta, 6)
         
             newPage(PageSize)
+            font(defaultFont)
 
             text(dateNow, (width()-50, 30), align = "right")
             text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
@@ -304,6 +314,7 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             name = getName(fonta, 6)
         
             newPage(PageSize)
+            font(defaultFont)
 
             text(dateNow, (width()-50, 30), align = "right")
             text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
@@ -329,4 +340,5 @@ showRandomWords(weight, 'A4Landscape', 15, RandWord(words, 20))
 showRandomArticle('A4Landscape', 12, article, upright, italic)
 
 #save Image
-#saveImage("~/Desktop/PDFSpecimenWithoutItalic.pdf")
+if savePDF:
+    saveImage("PDFSpecimenWithoutItalic.pdf")
