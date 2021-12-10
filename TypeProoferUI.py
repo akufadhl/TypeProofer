@@ -6,10 +6,6 @@ import random
 from datetime import datetime
 import re
 
-Variable([
-    dict(name="savePDF", ui="Button")
-], globals())
-
 #Export your fonts to the /Fonts folder
 fontPath = "Fonts"
 defaultFont = "lib/Fonts/Modal-Regular.otf"
@@ -331,7 +327,8 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             #txt.append(article)
             textBox(article,
                     (x, y, w*2.3, h), align="left")
-
+#save Image
+    
 hamburgefont(weight, 'A4Landscape', 45, upright, italic)              
 showAllGlyphs(weight, 'A4Landscape', 20)
 showGlyphs(weight, 'A4Landscape', 75, Uppercase)
@@ -339,6 +336,5 @@ showGlyphs(weight, 'A4Landscape', 75, Lowercase)
 showRandomWords(weight, 'A4Landscape', 15, RandWord(words, 20))
 showRandomArticle('A4Landscape', 12, article, upright, italic)
 
-#save Image
-if savePDF:
-    saveImage("PDFSpecimenWithoutItalic.pdf")
+name = ""
+saveImage("PDFSpecimenWithoutItalic.pdf")
