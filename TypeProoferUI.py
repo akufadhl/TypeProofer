@@ -6,6 +6,62 @@ import random
 from datetime import datetime
 import re
 
+Variable([
+    #Hamburgefonts
+    dict(name="fontsize", ui="Slider",
+            args=dict(
+                # some vanilla specific
+                # setting for a slider
+                value=45,
+                minValue=8,
+                maxValue=100)),
+    dict(name="hamburg", ui="CheckBox", args=dict(title="Hamburgefonts", value=True)),
+
+    #Show All Glyphs
+    dict(name="fontsize2", ui="Slider",
+            args=dict(
+                # some vanilla specific
+                # setting for a slider
+                value=20,
+                minValue=8,
+                maxValue=100)),
+    dict(name="allGlyphs", ui="CheckBox", args=dict(title="ShowAllGlyphs", value=False)),
+    #Show Glyphs
+    dict(name="fontsize3", ui="Slider",
+            args=dict(
+                # some vanilla specific
+                # setting for a slider
+                value=75,
+                minValue=8,
+                maxValue=120)),
+    dict(name="Uppercase", ui="CheckBox"),
+    dict(name="Lowercase", ui="CheckBox"),
+
+    #Random Words
+    dict(name="fontsize4", ui="Slider",
+            args=dict(
+                # some vanilla specific
+                # setting for a slider
+                value=15,
+                minValue=8,
+                maxValue=120)),
+    dict(name="wordCount", ui="EditText", args=dict(text='200')),
+    dict(name="RandomWord", ui="CheckBox"),
+    
+    #Show Random Article
+    dict(name="fontsize5", ui="Slider",
+            args=dict(
+                # some vanilla specific
+                # setting for a slider
+                value=12,
+                minValue=8,
+                maxValue=120)),
+    dict(name="RandomArticle", ui="CheckBox"),
+
+    dict(name="filename", ui="EditText", args=dict(text='filename')),
+    dict(name="savePDF", ui="CheckBox", continuous=False),
+], globals())
+
 #Export your fonts to the /Fonts folder
 fontPath = "Fonts"
 defaultFont = "lib/Fonts/Modal-Regular.otf"
@@ -15,8 +71,8 @@ dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 words = 'Words.txt'
 
-Uppercase = "ABCDEFGHIJKL\nMNOPQRSTUVWXYZ"
-Lowercase = Uppercase.lower()
+uppercase = "ABCDEFGHIJKL\nMNOPQRSTUVWXYZ"
+lowercase = uppercase.lower()
 with open("article.txt", "r", encoding="utf-8") as article:
     #articles = article.read()
     article = re.sub(r'\[\d+\]', ' ', article.read())
@@ -305,7 +361,7 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
     else:
         for pages in upright:
             uprights = pages
-            print(uprights)
+            #print(uprights)
             fonta = ttLib.TTFont(pages)
             name = getName(fonta, 6)
         
@@ -327,14 +383,29 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             #txt.append(article)
             textBox(article,
                     (x, y, w*2.3, h), align="left")
-#save Image
-    
-hamburgefont(weight, 'A4Landscape', 45, upright, italic)              
-showAllGlyphs(weight, 'A4Landscape', 20)
-showGlyphs(weight, 'A4Landscape', 75, Uppercase)
-showGlyphs(weight, 'A4Landscape', 75, Lowercase)
-showRandomWords(weight, 'A4Landscape', 15, RandWord(words, 20))
-showRandomArticle('A4Landscape', 12, article, upright, italic)
+#save Image   
+if hamburg: 
+    if fontsize:
+        hamburgefont(weight, 'A4Landscape', fontsize, upright, italic)
 
-name = ""
-saveImage("PDFSpecimenWithoutItalic.pdf")
+if allGlyphs:
+    if fontsize2:         
+        showAllGlyphs(weight, 'A4Landscape', fontsize2)
+
+if fontsize3:
+    if Uppercase:
+            showGlyphs(weight, 'A4Landscape', fontsize3, uppercase)
+    if Lowercase:
+        showGlyphs(weight, 'A4Landscape', fontsize3, lowercase)
+
+if RandomWord:
+    if fontsize4:
+        if wordCount:
+                showRandomWords(weight, 'A4Landscape', fontsize4, RandWord(words, int(wordCount)))
+            
+if fontsize5:
+    if RandomArticle:
+        showRandomArticle('A4Landscape', fontsize5, article, upright, italic)
+
+if savePDF:
+    saveImage(f"{filename}.pdf")
