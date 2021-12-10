@@ -6,9 +6,11 @@ import random
 from datetime import datetime
 import re
 
-#add your font Path here
-fontPath = "Fonts"
 
+
+#Export your fonts to the /Fonts folder
+fontPath = "Fonts"
+defaultFont = "lib/Fonts/ModalRegular.otf"
 now = datetime.now()
 dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
@@ -27,8 +29,6 @@ def RandWord(words, amounts):
         words = word_file.read().split()
         random_word = random.sample(words, amounts)
     return (RandomWords.join(random_word))
-
-randomWord = str(RandWord(words, 700))
 
 #Get font "name" table
 def getName(font, ID, platformID=3, platEncID=1):
@@ -265,7 +265,7 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
                 (x, y, w, h), align="left")
 
 def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
-    x, y, w, h = 65, 90, 710/2.3, 450
+    x, y, w, h = 65,75, 710/2.3, 450
     
     if len(italic) != 0:
         for pages, pages2 in zip(upright, italic):
@@ -325,8 +325,8 @@ hamburgefont(weight, 'A4Landscape', 45, upright, italic)
 showAllGlyphs(weight, 'A4Landscape', 20)
 showGlyphs(weight, 'A4Landscape', 75, Uppercase)
 showGlyphs(weight, 'A4Landscape', 75, Lowercase)
-showRandomWords(weight, 'A4Landscape', 15, randomWord)
+showRandomWords(weight, 'A4Landscape', 15, RandWord(words, 20))
 showRandomArticle('A4Landscape', 12, article, upright, italic)
 
 #save Image
-saveImage("~/Desktop/PDFSpecimenWithoutItalic.pdf")
+#saveImage("~/Desktop/PDFSpecimenWithoutItalic.pdf")
