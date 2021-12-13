@@ -215,7 +215,7 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
 
         #DateTime
         text(dateNow, (width()-50, 30), align = "right")
-        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
 
         for fonts in upright:
             paths = fonts
@@ -233,7 +233,7 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
 
         #DateTime
         text(dateNow, (width()-50, 30), align = "right")
-        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
         
         for fonts in italic:
             paths = fonts
@@ -251,7 +251,7 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
 
         #DateTime
         text(dateNow, (width()-50, 30), align = "right")
-        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
         
         for fonts in upright:
             paths = fonts
@@ -277,7 +277,7 @@ def showGlyphs(FontNames, PageSize, Fontsize, Letters):
 
         #DateTime
         text(dateNow, (width()-50, 30), align = "right")
-        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
 
 
         #Old/New
@@ -309,7 +309,7 @@ def showAllGlyphs(FontNames, PageSize, Fontsize):
 
         #DateTime
         text(dateNow, (width()-50, 30), align = "right")
-        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
         
         txt = FormattedString()
         txt.font(path)
@@ -332,7 +332,7 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
         font(defaultFont)
 
         text(dateNow, (width()-50, 30), align = "right")
-        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
     
         text("Random Words", (50, height()-30))
 
@@ -359,7 +359,7 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             font(defaultFont)
 
             text(dateNow, (width()-50, 30), align = "right")
-            text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+            text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
     
             text("Random Article", (50, height()-30))
 
@@ -388,7 +388,7 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             font(defaultFont)
 
             text(dateNow, (width()-50, 30), align = "right")
-            text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+            text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
     
             text("Random Article", (50, height()-30))
 
