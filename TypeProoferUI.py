@@ -204,7 +204,7 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
     path = upright[0]
     fonta = ttLib.TTFont(path)
     name = getName(fonta, 6)
-    print(italic)    
+    #print(italic)    
     if italic != 0:
 
         newPage(PageSize)
