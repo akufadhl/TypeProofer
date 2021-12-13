@@ -156,8 +156,8 @@ designerName = getName(fonts[0], 9)
 familyName = getName(fonts[0], 16) #Basic Family Name
 manufacturer = getName(fonts[0], 8)
     
-regular = weight[0]
-slanted = weight[2]
+#regular = weight[0]
+#slanted = weight[2]
 
 #Font Feature
 
@@ -200,10 +200,12 @@ def compareNewOld(FontNames, PageSize, Fontsize, Letters):
 
 def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0): 
     x, y, w, h = 65, 100, 710, 430
-    if italic == 0:
-        path = upright[0]
-        fonta = ttLib.TTFont(path)
-        name = getName(fonta, 6)
+    
+    path = upright[0]
+    fonta = ttLib.TTFont(path)
+    name = getName(fonta, 6)
+    print(italic)    
+    if italic != 0:
 
         newPage(PageSize)
         font(defaultFont)
@@ -222,8 +224,7 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
             fontSize(Fontsize)
             textBox("Hamburgefonts1234567890",(x, y, w, h))
             translate(x=0, y=-fontLineHeight())
-        
-    elif italic != 0:       
+
         newPage(PageSize)
         font(defaultFont)
         #FontName
@@ -235,6 +236,24 @@ def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0):
         text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
         
         for fonts in italic:
+            paths = fonts
+            #Old(top)
+            font(paths)
+            fontSize(Fontsize)
+            textBox("Hamburgefonts1234567890",(x, y, w, h))
+            translate(x=0, y=-fontLineHeight())
+    else:       
+        newPage(PageSize)
+        font(defaultFont)
+        #FontName
+        text(name, (50, 30))
+        text("Hamburgefont", (50, height()-30))
+
+        #DateTime
+        text(dateNow, (width()-50, 30), align = "right")
+        text(f"{str(Fontsize)} point", (width()-50, height()-30), align = "right")
+        
+        for fonts in upright:
             paths = fonts
             #Old(top)
             font(paths)
