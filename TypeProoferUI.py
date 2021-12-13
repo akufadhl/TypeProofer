@@ -123,7 +123,7 @@ def sortFont(fonts):
         weight = font['OS/2'].usWeightClass
         width = font['OS/2'].usWidthClass
         italic = int(font['post'].italicAngle)
-    
+
         weightClass[name] = width, weight, italic
     
     weights = sorted(weightClass.items(), key=lambda x:(x[1],x[1][0]))
@@ -143,7 +143,7 @@ def sortFont(fonts):
     weight = []
     for a in weights:
         weight.append(fontPath + "/" + a[0] + ".otf")
-    
+
     return weight, uprights, italics
 
 fontList = sortFont(fonts)
@@ -200,7 +200,7 @@ def compareNewOld(FontNames, PageSize, Fontsize, Letters):
 
 def hamburgefont(FontNames, PageSize, Fontsize, upright, italic=0): 
     x, y, w, h = 65, 100, 710, 430
-    if italic != 0:
+    if italic == 0:
         path = upright[0]
         fonta = ttLib.TTFont(path)
         name = getName(fonta, 6)
