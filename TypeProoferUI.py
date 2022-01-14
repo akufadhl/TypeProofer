@@ -7,6 +7,19 @@ from datetime import datetime
 import re
 
 Variable([
+    #CompareNewOld
+    #Hamburgefonts
+    dict(name="fontsize0", ui="Slider",
+            args=dict(
+                # some vanilla specific
+                # setting for a slider
+                value=45,
+                minValue=8,
+                maxValue=100)),
+    dict(name="compare", ui="CheckBox", args=dict(title="compare", value=False)),
+    dict(name="Uppercase0", ui="CheckBox"),
+    dict(name="Lowercase0", ui="CheckBox"),
+    
     #Hamburgefonts
     dict(name="fontsize", ui="Slider",
             args=dict(
@@ -15,7 +28,7 @@ Variable([
                 value=45,
                 minValue=8,
                 maxValue=100)),
-    dict(name="hamburg", ui="CheckBox", args=dict(title="Hamburgefonts", value=True)),
+    dict(name="hamburg", ui="CheckBox", args=dict(title="Hamburgefonts", value=False)),
 
     #Show All Glyphs
     dict(name="fontsize2", ui="Slider",
@@ -34,7 +47,7 @@ Variable([
                 value=75,
                 minValue=8,
                 maxValue=120)),
-    dict(name="Uppercase", ui="CheckBox"),
+    dict(name="Uppercase", ui="CheckBox", args=dict(value=True)),
     dict(name="Lowercase", ui="CheckBox"),
 
     #Random Words
@@ -402,7 +415,15 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
             #txt.append(article)
             textBox(article,
                     (x, y, w*2.3, h), align="left")
-#save Image   
+#save Image
+if compare:
+    if fontsize0:
+        if Uppercase0: 
+            compareNewOld(weight, 'A4Landscape', fontsize0, uppercase)
+        if Lowercase0:
+            compareNewOld(weight, 'A4Landscape', fontsize0, lowercase)
+
+
 if hamburg: 
     if fontsize:
         hamburgefont(weight, 'A4Landscape', fontsize, upright, italic)
