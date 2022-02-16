@@ -19,6 +19,7 @@ Variable([
     dict(name="compare", ui="CheckBox", args=dict(title="compare", value=False)),
     dict(name="Uppercase0", ui="CheckBox"),
     dict(name="Lowercase0", ui="CheckBox"),
+    dict(name="Number0", ui="CheckBox"),
     
     #Hamburgefonts
     dict(name="fontsize", ui="Slider",
@@ -84,8 +85,9 @@ dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 words = 'Words.txt'
 
-uppercase = "ABCDEFGHIJKL\nMNOPQRSTUVWXYZ"
+uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 lowercase = uppercase.lower()
+number = "0123456789"
 with open("article.txt", "r", encoding="utf-8") as article:
     #articles = article.read()
     article = re.sub(r'\[\d+\]', ' ', article.read())
@@ -422,6 +424,8 @@ if compare:
             compareNewOld(weight, 'A4Landscape', fontsize0, uppercase)
         if Lowercase0:
             compareNewOld(weight, 'A4Landscape', fontsize0, lowercase)
+        if Number0:
+            compareNewOld(weight, 'A4Landscape', fontsize0, number)
 
 
 if hamburg: 
@@ -448,4 +452,4 @@ if fontsize5:
         showRandomArticle('A4Landscape', fontsize5, article, upright, italic)
 
 if savePDF:
-    saveImage(f"{filename}.pdf")
+    saveImage(f"~/Desktop/{filename}.pdf")
