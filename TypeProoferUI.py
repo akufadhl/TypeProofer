@@ -217,7 +217,7 @@ def compareNewOld(FontNames, PageSize, Fontsize, Letters):
         text(dateNow, (50, 50))
 
         #Old/New
-        text("Upright(top), Italic(bottom)", (width()-50, 50), align = "right")
+        text("Original(top), Refined(bottom)", (width()-50, 50), align = "right")
 
         #New(Bottom)
         font(path)
