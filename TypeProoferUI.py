@@ -20,6 +20,7 @@ Variable([
     dict(name="Uppercase0", ui="CheckBox"),
     dict(name="Lowercase0", ui="CheckBox"),
     dict(name="Number0", ui="CheckBox"),
+    dict(name="Rounded0", ui="CheckBox"),
 
     #Compare Italic Upright
     dict(name="fontsizeUpIc", ui="Slider",
@@ -99,6 +100,7 @@ dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 words = 'Words.txt'
 
+rounded = "BCDƏGOPÞRSabcdðegopþqsß"
 uppercase = "ABCDEFGHIJKLMNOPÞQRSTUVWXYZ"
 lowercase = uppercase.lower()
 number = "0123456789"
@@ -387,7 +389,7 @@ def showAllGlyphs(FontNames, PageSize, Fontsize):
                 (x, y, w, h), align="left")
                 
 def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
-    x, y, w, h = 65, 90, 710, 450
+    x, y, w, h = 65, 50, 710, 500
 
     for pages in FontNames: 
         path = pages
@@ -493,7 +495,9 @@ if compare:
             compareNewOld(weight, 'A4Landscape', fontsize0, lowercase)
         if Number0:
             compareNewOld(weight, 'A4Landscape', fontsize0, number)
-
+        if Rounded0:
+            compareNewOld(weight, 'A4Landscape', fontsize0, rounded)
+            
 if compareUpIc:
     if fontsizeUpIc:
         if UppercaseUpIc: 
