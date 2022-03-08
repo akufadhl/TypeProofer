@@ -20,6 +20,19 @@ Variable([
     dict(name="Uppercase0", ui="CheckBox"),
     dict(name="Lowercase0", ui="CheckBox"),
     dict(name="Number0", ui="CheckBox"),
+
+    #Compare Italic Upright
+    dict(name="fontsizeUpIc", ui="Slider",
+            args=dict(
+                # some vanilla specific
+                # setting for a slider
+                value=45,
+                minValue=8,
+                maxValue=100)),
+    dict(name="compareUpIc", ui="CheckBox", args=dict(title="compare", value=False)),
+    dict(name="UppercaseUpIc", ui="CheckBox"),
+    dict(name="LowercaseUpIc", ui="CheckBox"),
+    dict(name="NumberUpIc", ui="CheckBox"),
     
     #Hamburgefonts
     dict(name="fontsize", ui="Slider",
@@ -50,6 +63,7 @@ Variable([
                 maxValue=120)),
     dict(name="Uppercase", ui="CheckBox", args=dict(value=True)),
     dict(name="Lowercase", ui="CheckBox"),
+    dict(name="Number", ui="CheckBox"),
 
     #Random Words
     dict(name="fontsize4", ui="Slider",
@@ -85,7 +99,7 @@ dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 words = 'Words.txt'
 
-uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+uppercase = "ABCDEFGHIJKLMNOPÞQRSTUVWXYZ"
 lowercase = uppercase.lower()
 number = "0123456789"
 with open("article.txt", "r", encoding="utf-8") as article:
@@ -110,7 +124,7 @@ def fontName(folder):
     names = []    
     for name in os.listdir(folder):
         if os.path.isfile(os.path.join(folder, name)):
-            if (".otf" in name) and ("Original" not in name):
+            if (".otf" in name) and ("Original" not in name) and ("Italic" not in name):
                 names.append(fontPath + "/" +name)
     #print(names)  
     return names
@@ -126,6 +140,7 @@ def TTObject(fontList):
 
 path = fontName(fontPath)  
 fonts = TTObject(path)
+#print(path)
 #print(fonts)
 
 def sortFont(fonts):
@@ -162,6 +177,7 @@ def sortFont(fonts):
     return weight, uprights, italics
 
 fontList = sortFont(fonts)
+#print(fontList)
 weight = fontList[0]
 upright = fontList[1]
 italic = fontList[2]
@@ -199,7 +215,40 @@ def compareNewOld(FontNames, PageSize, Fontsize, Letters):
         text(dateNow, (50, 50))
 
         #Old/New
-        text("Old(top), New(bottom)", (width()-50, 50), align = "right")
+        text("Upright(top), Italic(bottom)", (width()-50, 50), align = "right")
+
+        #New(Bottom)
+        font(path)
+        fontSize(Fontsize)
+        textBox(Letters,
+                (80, height()-550, 700, 250), align="center")
+
+        #Old(top)
+        font(OriginalFont)
+        fontSize(Fontsize)
+        textBox(Letters,
+                (80, height()-350, 700, 250), align="center")
+
+def compareUprightItalic(FontNames, PageSize, Fontsize, Letters): 
+
+    for pages in FontNames:
+        path = pages
+        OriginalFont = re.sub(r'.otf|Regular.otf', r'Italic.otf', path)
+        print(OriginalFont)
+        fonta = ttLib.TTFont(pages)
+        name = getName(fonta, 6)
+        #New Page
+        newPage(PageSize)
+        font(defaultFont)
+
+        #FontName
+        text(pages, (50, height()-50))
+
+        #DateTime
+        text(dateNow, (50, 50))
+
+        #Old/New
+        text("Italic(top), Upright(bottom)", (width()-50, 50), align = "right")
 
         #New(Bottom)
         font(path)
@@ -300,6 +349,8 @@ def showGlyphs(FontNames, PageSize, Fontsize, Letters):
             text("Uppercase Preview", (50, height()-30))
         elif Letters == Lowercase:
             text("Lowercase Preview", (50, height()-30))
+        elif Letters == Number:
+            text("Lowercase Preview", (50, height()-30))
 
         #Old(top)
         font(path)
@@ -358,6 +409,22 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
         fontSize(Fontsize)
         textBox(RandomWord,
                 (x, y, w, h), align="left")
+        
+        newPage(PageSize)
+        font(defaultFont)
+
+        text(dateNow, (width()-50, 30), align = "right")
+        text(f"{int(Fontsize)} points", (width()-50, height()-30), align = "right")
+    
+        text("Random Words", (50, height()-30))
+
+        #font(path)
+        text(name, (50, 30))
+
+        font(path)
+        fontSize(Fontsize)
+        textBox(RandomWord.upper(),
+                (x, y, w, h), align="left")
 
 def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
     x, y, w, h = 65,75, 710/2.3, 450
@@ -366,7 +433,7 @@ def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
         for pages, pages2 in zip(upright, italic):
             uprights = pages
             italics = pages2
-            print(uprights, italics)
+            #print(uprights, italics)
             fonta = ttLib.TTFont(pages)
             name = getName(fonta, 6)
         
@@ -427,6 +494,14 @@ if compare:
         if Number0:
             compareNewOld(weight, 'A4Landscape', fontsize0, number)
 
+if compareUpIc:
+    if fontsizeUpIc:
+        if UppercaseUpIc: 
+            compareUprightItalic(weight, 'A4Landscape', fontsize0, uppercase)
+        if LowercaseUpIc:
+            compareUprightItalic(weight, 'A4Landscape', fontsize0, lowercase)
+        if NumberUpIc:
+            compareUprightItalic(weight, 'A4Landscape', fontsize0, number)
 
 if hamburg: 
     if fontsize:
@@ -441,6 +516,9 @@ if fontsize3:
             showGlyphs(weight, 'A4Landscape', fontsize3, uppercase)
     if Lowercase:
         showGlyphs(weight, 'A4Landscape', fontsize3, lowercase)
+    if Number:
+        showGlyphs(weight, 'A4Landscape', fontsize3, number)
+
 
 if RandomWord:
     if fontsize4:
