@@ -10,8 +10,6 @@ def randomArticle():
     realText = ""
     for a in title:
         realText += a.getText()
-
-
     #print(f"{realText}")
 
     return realText

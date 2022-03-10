@@ -20,7 +20,8 @@ Variable([
     dict(name="Uppercase0", ui="CheckBox"),
     dict(name="Lowercase0", ui="CheckBox"),
     dict(name="Number0", ui="CheckBox"),
-    dict(name="Rounded0", ui="CheckBox"),
+    dict(name="Puncts0", ui="CheckBox"),
+    dict(name="Symbols0", ui="CheckBox"),
 
     #Compare Italic Upright
     dict(name="fontsizeUpIc", ui="Slider",
@@ -100,7 +101,7 @@ dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 words = 'Words.txt'
 
-rounded = "BCDƏGOPÞRSabcdðegopþqsß"
+puncts = r".,:;…!¡?¿·•*#/\-–—_(){}[]‚„“”‘’«»‹›\"\'"
 uppercase = "ABCDEFGHIJKLMNOPÞQRSTUVWXYZ"
 lowercase = uppercase.lower()
 number = "0123456789"
@@ -126,7 +127,7 @@ def fontName(folder):
     names = []    
     for name in os.listdir(folder):
         if os.path.isfile(os.path.join(folder, name)):
-            if (".otf" in name) and ("Original" not in name) and ("Italic" not in name):
+            if (".otf" in name) and ("Original" not in name):
                 names.append(fontPath + "/" +name)
     #print(names)  
     return names
@@ -429,7 +430,7 @@ def showRandomWords(FontNames, PageSize, Fontsize, RandomWord):
                 (x, y, w, h), align="left")
 
 def showRandomArticle(PageSize, Fontsize, article,upright, italic=0):
-    x, y, w, h = 65,75, 710/2.3, 450
+    x, y, w, h = 65, 55, 710/2.3, 500
     
     if len(italic) != 0:
         for pages, pages2 in zip(upright, italic):
@@ -495,8 +496,8 @@ if compare:
             compareNewOld(weight, 'A4Landscape', fontsize0, lowercase)
         if Number0:
             compareNewOld(weight, 'A4Landscape', fontsize0, number)
-        if Rounded0:
-            compareNewOld(weight, 'A4Landscape', fontsize0, rounded)
+        if Puncts0:
+            compareNewOld(weight, 'A4Landscape', fontsize0, puncts)
             
 if compareUpIc:
     if fontsizeUpIc:
