@@ -100,8 +100,8 @@ now = datetime.now()
 dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 words = 'Words.txt'
-
-puncts = r".,:;…!¡?¿·•*#/\-–—_(){}[]‚„“”‘’«»‹›\"\'"
+symbols = "ƒ@&¶§©®™°|¦†‡¢$€£¥+−×÷=><~^%‰"
+puncts = ".,:;…!¡?¿·•*#/\-–—_(){}[]‚„“”‘’«»‹›\"\'"
 uppercase = "ABCDEFGHIJKLMNOPÞQRSTUVWXYZ"
 lowercase = uppercase.lower()
 number = "0123456789"
@@ -498,6 +498,9 @@ if compare:
             compareNewOld(weight, 'A4Landscape', fontsize0, number)
         if Puncts0:
             compareNewOld(weight, 'A4Landscape', fontsize0, puncts)
+        if Symbols0:
+            compareNewOld(weight, 'A4Landscape', fontsize0, symbols)
+
             
 if compareUpIc:
     if fontsizeUpIc:
