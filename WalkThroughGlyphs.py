@@ -7,9 +7,9 @@ now = datetime.now()
 dateNow = now.strftime("%d/%m/%Y %H:%M:%S")
 
 #you can just use the Masters exports (delete other fonts), and export the original file and add 'Original' after the name eg, MFFlapperOriginal. Then check the regex for original fonts list creation.
-folder = '/Users/fadhlschriftlabor/Documents/TypeProofer/Fonts'
+folder = 'Directory'
 #WordLists are courtesy of https://github.com/dwyl/english-words
-words = '/Users/fadhlschriftlabor/Documents/TypeProofer/Words.txt'
+words = 'Directory'
 AllGlyphs = """AÁĂÂÄÀĀĄÅÃÆBCĆČÇĊDÐĎĐEÉĚÊËĖÈĒĘFGĞĢĠHĦIĲÍÎÏİÌĪĮJKĶLĹĽĻĿŁMNŃŇŅÑŊOÓÔÖÒŐŌØÕŒPÞQRŔŘŖSŚŠŞȘẞƏTŦŤŢȚUÚÛÜÙŰŪŲŮVWẂŴẄẀXYÝŶŸỲZŹŽŻaáăâäàāąåãæbcćčçċdðďđeéěêëėèēęəfgğģġhħiıíîïìĳīįjȷkķlĺľļŀłmnńňņñŋoóôöòőōøõœpþqrŕřŗsśšşșßtŧťţțuúûüùűūųůvwẃŵẅẁxyýŷÿỳzźžżªºΔΩμπ0123456789⓿❶❷❸❹❺❻❼❽❾⓪①②③④⑤⑥⑦⑧⑨ ⁰¹²³⁴⁵⁶⁷⁸⁹⁄½⅓⅔¼¾⅛⅜⅝⅞.,:;…!¡?¿·•*⁂#․//\⁑-­–—_ (){}[] ‚„“”‘’«»‹›"'ƒ☺@&¶§©®℗™°|¦†‡℮№℠₿¢¤$€£¥+−×÷=≠><≥≤±≈~¬^∞∅∫∏∑√µ∂%‰↑↗→↘↓↙←↖↔↕↰↱↲↳●○◊■□▲△"""
 Letters = "AÆBCDÐEFGHIJKLMNOŒ\nPÞQRSẞƏTUVWXYZ"
 Figures = "0123456789"
