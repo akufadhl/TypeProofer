@@ -35,7 +35,7 @@ for a in FontNames:
 #Should be a separate function that takes a predifined param, such as lowercase, uppercase, figures, symbols.    
 for pages in FontNames:
     for glyphs in AllGlyphs:
-        path = '/Users/fadhlschriftlabor/Documents/TypeProofer/Fonts/{f}'.format(f = pages)
+        path = 'Directory/{f}'.format(f = pages)
     
         newPage(500, 500)
         print(glyphs)
@@ -53,4 +53,4 @@ for pages in FontNames:
         textBox(glyphs,
                 (100, 100, 300, 300), align="center")
 
-saveImage("~/Desktop/MFFlapper Upright.gif")
+# saveImage("~/Desktop/{filename}.gif")
